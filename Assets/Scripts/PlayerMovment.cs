@@ -1,13 +1,22 @@
+using Unity.Mathematics;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovment : MonoBehaviour
 {
+    [Header("Jumping")]
+    [SerializeField] private float _baseJumpForce = 1f;
     [SerializeField] private float _JumpForce = 1;
     [SerializeField] private float _jumpDelay = 1f;
+    [SerializeField] private float _startJumpHeight = 3f;
+    [SerializeField] private float _jumpMultiplyer = 1;
+    [Header("Camera")]
     [SerializeField] private float _rotationSpeed = 1f;
     [SerializeField] private float _rotateCameraSpeed = 1;
+    [SerializeField] private Transform _cameraHolder;
     [SerializeField] private Transform _camera;
+
     private Vector3 _PlayerRotation;
     private Vector3 _cameraRotation;
     private Rigidbody rb;
@@ -21,21 +30,25 @@ public class PlayerMovment : MonoBehaviour
     void Update()
     {
         transform.Rotate(_PlayerRotation * Time.deltaTime);
-        _camera.Rotate(_cameraRotation * Time.deltaTime);
+        _cameraHolder.Rotate(_cameraRotation * Time.deltaTime);
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
-        _CurrentTilt = ctx.ReadValue<Vector2>().y;
-        Debug.Log("charge jump: " + _CurrentTilt);
-
+        _CurrentTilt = ctx.ReadValue<Vector2>().y * -1;
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
-            _CurrentTilt = _CurrentTilt * -1;
-            _CurrentTilt = (_CurrentTilt > 0) ? _CurrentTilt : 0;
-            rb.AddForce(transform.forward * _JumpForce * _CurrentTilt, ForceMode.Impulse);
+            _CurrentTilt = Mathf.Clamp(_CurrentTilt, 0, Mathf.Infinity);
+
+            float cameraHeight = transform.position.y - _camera.position.y;
+            cameraHeight = Mathf.Clamp(cameraHeight + _startJumpHeight, 0, Mathf.Infinity);
+
+            Vector3 jumpDir = (transform.forward + new Vector3(0, cameraHeight * _jumpMultiplyer, 0)).normalized;
+            Debug.Log(jumpDir + " JUmp dir");
+
+            rb.AddForce(jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce), ForceMode.Impulse);
         }
     }
     public void CameraRotation(InputAction.CallbackContext ctx)
@@ -44,5 +57,18 @@ public class PlayerMovment : MonoBehaviour
 
         _PlayerRotation = new Vector3(0, lookDir.x * _rotationSpeed, 0);
         _cameraRotation = new Vector3(lookDir.y * _rotationSpeed, 0, 0);
+    }
+    private void OnDrawGizmos()
+    {
+        float temp = _CurrentTilt;
+        temp = Mathf.Clamp(temp, 0, Mathf.Infinity);
+
+        float cameraHeight = transform.position.y - _camera.position.y;
+        cameraHeight = Mathf.Clamp(cameraHeight + _startJumpHeight, 0, Mathf.Infinity);
+
+        Vector3 jumpDir = (transform.forward + new Vector3(0, cameraHeight, 0)).normalized;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));
     }
 }
