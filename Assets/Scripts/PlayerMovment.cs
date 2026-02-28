@@ -57,7 +57,6 @@ public class PlayerMovment : MonoBehaviour
         {
             _skinnedMeshRenderer.SetBlendShapeWeight(_blendShapeIndex, _CurrentTilt * 100);
         }
-
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
