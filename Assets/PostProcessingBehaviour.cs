@@ -17,11 +17,11 @@ public class PostProcessingBehaviour : MonoBehaviour
         StopAllCoroutines();
         if (initiate)
         {
-            StartCoroutine(ChangeLensDistortion(0.2f, 10,_defaultLensDist, _flyingLensDist));
+            StartCoroutine(ChangeLensDistortion(0.2f, 100,_defaultLensDist, _flyingLensDist));
         }
         else
         {
-            StartCoroutine(ChangeLensDistortion(0.2f, 10, _flyingLensDist, _defaultLensDist));    
+            StartCoroutine(ChangeLensDistortion(0.2f, 100, _flyingLensDist, _defaultLensDist));    
         }
       //  lensDistortion.intensity.value = -0.75f;
     }
