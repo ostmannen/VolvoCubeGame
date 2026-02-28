@@ -31,9 +31,11 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private Transform _camera;
     [Header("Visual")]
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+    [Header("LineRenderer")]
+    [SerializeField] private int _lineCount;
+    private LineRenderer _LineRenderer;
     private Vector3 _PlayerRotation;
     private Vector3 _cameraRotation;
-
     private Rigidbody rb;
     private float _CurrentTilt;
     void Start()
@@ -41,6 +43,16 @@ public class PlayerMovment : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        _LineRenderer = GetComponent<LineRenderer>();
+        _LineRenderer.startColor = Color.red;
+        _LineRenderer.endColor = Color.green;
+
+        _LineRenderer.startWidth = 0.2f;
+        _LineRenderer.endWidth = 0.2f;
+
+        _LineRenderer.positionCount = _lineCount;
+
     }
     void Update()
     {
@@ -69,16 +81,40 @@ public class PlayerMovment : MonoBehaviour
 
         t = 1f - t;
 
-        //t = Mathf.Clamp01(t);
-
         float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
 
         Debug.Log("jumpangle: " + jumpAngle);
 
         Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
 
-        Gizmos.color = Color.blue;
-        Debug.DrawLine(transform.position, transform.position + jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));
+        Vector3 currentPos = transform.position;
+        Vector3 velocity = jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce) / rb.mass;
+        Vector3 hitPosition = Vector3.zero;
+        bool weHit = false;
+
+        for (int i = 0; i < _lineCount; i++)
+        {
+            if (weHit)
+            {
+                _LineRenderer.SetPosition(i, hitPosition);
+                continue;
+            }
+            Vector3 nextPos = currentPos + velocity * Time.fixedDeltaTime;
+
+            if (Physics.Linecast(currentPos, nextPos, out RaycastHit hit))
+            {
+                hitPosition = nextPos;
+                weHit = true;
+                continue;
+            }
+
+            currentPos = nextPos;
+            velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
+
+            velocity *= (1f - rb.linearDamping * Time.fixedDeltaTime);
+            _LineRenderer.SetPosition(i, currentPos);
+        }
+
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
@@ -125,24 +161,5 @@ public class PlayerMovment : MonoBehaviour
     private void ResetJump()
     {
         _exetingGround = false;
-    }
-    private void OnDrawGizmos()
-    {
-        /*float camY = _camera.forward.y;
-
-        float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
-
-        t = 1f - t;
-
-        //t = Mathf.Clamp01(t);
-
-        float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
-
-        Debug.Log("jumpangle: " + jumpAngle);
-
-        Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));*/
     }
 }
