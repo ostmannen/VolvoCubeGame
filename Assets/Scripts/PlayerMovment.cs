@@ -132,6 +132,11 @@ public class PlayerMovment : MonoBehaviour
         if (ctx.started && _Grounded)
         {
             Jump3();
+            //weewoo
+            if(_CurrentTilt >= 0.7f)
+            {
+                GetComponent<PostProcessingBehaviour>().LensDistortionChanged(true);
+            }
         }
     }
     public void Jump3()
