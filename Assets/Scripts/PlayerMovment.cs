@@ -62,15 +62,13 @@ public class PlayerMovment : MonoBehaviour
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
         _CurrentTilt = ctx.ReadValue<Vector2>().y * -1;
+        _CurrentTilt = Mathf.Clamp(_CurrentTilt, 0, 1);
     }
     public void Jump(InputAction.CallbackContext ctx)
     {
         if (ctx.started && _Grounded)
         {
-
             Jump3();
-
-
         }
     }
     public void Jump3()
