@@ -51,7 +51,6 @@ public class PlayerMovment : MonoBehaviour
         _LineRenderer.startWidth = 0.2f;
         _LineRenderer.endWidth = 0.2f;
 
-        _LineRenderer.positionCount = _lineCount;
 
     }
     void Update()
@@ -64,8 +63,8 @@ public class PlayerMovment : MonoBehaviour
         {
             rb.AddForce(Vector3.down * _extraGravity, ForceMode.Acceleration);
         }
-
         transform.Rotate(_PlayerRotation * Time.deltaTime);
+
         _cameraHolder.Rotate(_cameraRotation * Time.deltaTime);
         if (_skinnedMeshRenderer != null && _Grounded)
         {
@@ -75,6 +74,11 @@ public class PlayerMovment : MonoBehaviour
     }
     void DrawPath()
     {
+        if (_CurrentTilt == 0 || _exetingGround || !_Grounded)
+        {
+            _LineRenderer.positionCount = 0;
+            return;
+        }
         float camY = _camera.forward.y;
 
         float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
@@ -91,6 +95,8 @@ public class PlayerMovment : MonoBehaviour
         Vector3 velocity = jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce) / rb.mass;
         Vector3 hitPosition = Vector3.zero;
         bool weHit = false;
+        _LineRenderer.positionCount = _lineCount;
+
 
         for (int i = 0; i < _lineCount; i++)
         {
@@ -105,7 +111,8 @@ public class PlayerMovment : MonoBehaviour
             {
                 hitPosition = nextPos;
                 weHit = true;
-                continue;
+                _LineRenderer.positionCount = i;
+                return;
             }
 
             currentPos = nextPos;
@@ -114,7 +121,6 @@ public class PlayerMovment : MonoBehaviour
             velocity *= (1f - rb.linearDamping * Time.fixedDeltaTime);
             _LineRenderer.SetPosition(i, currentPos);
         }
-
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
