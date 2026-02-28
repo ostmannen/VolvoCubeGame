@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Respawn : MonoBehaviour
 {
@@ -6,16 +7,46 @@ public class Respawn : MonoBehaviour
     [SerializeField] private Transform _spawnPosition2;
     [SerializeField] private Transform _player1;
     [SerializeField] private Transform _player2;
+    [SerializeField] private PlayerMovment _input1;
+    [SerializeField] private PlayerMovment _input2;
+    private bool _Respawning1 = false;
+    private bool _Respawning2 = false;
     [SerializeField] private float _deathHeight = -10;
+    [SerializeField] private float _respawnDelay = 1f;
+    void Start()
+    {
+        _player1.position = _spawnPosition1.position;
+        _player2.position = _spawnPosition2.position;
+    }
     void Update()
     {
-        if (_player1.position.y < _deathHeight)
+        if (_player1.position.y < _deathHeight && !_Respawning1)
         {
-            _player1.position = _spawnPosition1.position;
+            Invoke(nameof(RespawnPlayer1), _respawnDelay);
+            _input1.enabled = false;
+            _Respawning1 = true;
         }
-        if (_player2.position .y < _deathHeight)
+        if (_player2.position.y < _deathHeight && !_Respawning2)
         {
-            _player2.position = _spawnPosition2.position;
+            Invoke(nameof(RespawnPlayer2), _respawnDelay);
+            _input2.enabled = false;
+            _Respawning2 = true;
         }
     }
+
+    void RespawnPlayer1()
+    {
+        _player1.position = _spawnPosition1.position;
+        _input1.enabled = true;
+        _Respawning1 = false;
+    }
+    void RespawnPlayer2()
+    {
+        _player2.position = _spawnPosition2.position;
+        _input2.enabled = true;
+        _Respawning2 = false;
+    }
+
+
+    //this is so dumb, but like brrrrrrrr... wrooomm
 }

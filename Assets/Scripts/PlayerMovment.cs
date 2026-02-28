@@ -12,6 +12,8 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private float _startJumpHeight = 3f;
     [SerializeField] private float _minAngle = -20;
     [SerializeField] private float _maxAngle = 70;
+    [SerializeField] private float _inversLerpMin = -1;
+    [SerializeField] private float _inversLerpMax = -0.2f;
     [SerializeField] private int _blendShapeIndex = 0;
     [SerializeField] private int _jumps = 5;
     private bool _exetingGround = false;
@@ -57,6 +59,26 @@ public class PlayerMovment : MonoBehaviour
         {
             _skinnedMeshRenderer.SetBlendShapeWeight(_blendShapeIndex, _CurrentTilt * 100);
         }
+        DrawPath();
+    }
+    void DrawPath()
+    {
+        float camY = _camera.forward.y;
+
+        float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
+
+        t = 1f - t;
+
+        //t = Mathf.Clamp01(t);
+
+        float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
+
+        Debug.Log("jumpangle: " + jumpAngle);
+
+        Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
+
+        Gizmos.color = Color.blue;
+        Debug.DrawLine(transform.position, transform.position + jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
     {
@@ -79,13 +101,15 @@ public class PlayerMovment : MonoBehaviour
 
         float camY = _camera.forward.y;
 
-        float t = Mathf.InverseLerp(-1f, -0.2f, camY);
+        float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
 
         t = 1f - t;
 
         //t = Mathf.Clamp01(t);
 
         float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
+
+        Debug.Log("jumpangle: " + jumpAngle);
 
         Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
 
@@ -104,15 +128,21 @@ public class PlayerMovment : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        float temp = _CurrentTilt;
-        temp = Mathf.Clamp(temp, 0, Mathf.Infinity);
+        /*float camY = _camera.forward.y;
 
-        float cameraHeight = transform.position.y - _camera.position.y;
-        cameraHeight = Mathf.Clamp(cameraHeight + _startJumpHeight, 0, Mathf.Infinity);
+        float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
 
-        Vector3 jumpDir = (transform.forward + new Vector3(0, cameraHeight, 0)).normalized;
+        t = 1f - t;
+
+        //t = Mathf.Clamp01(t);
+
+        float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
+
+        Debug.Log("jumpangle: " + jumpAngle);
+
+        Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));
+        Gizmos.DrawLine(transform.position, jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce));*/
     }
 }
