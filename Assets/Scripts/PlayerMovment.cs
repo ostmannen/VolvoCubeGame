@@ -75,6 +75,8 @@ public class PlayerMovment : MonoBehaviour
     {
         GameEventsManager.instance.OnRespawnPlayer -= OnRespawn;
     }
+
+    [SerializeField] private VisualEffect targetDecal;
     void Update()
     {
         if (!_exetingGround)
@@ -127,14 +129,18 @@ public class PlayerMovment : MonoBehaviour
             _skinnedMeshRenderer.SetBlendShapeWeight(_blendShapeIndex, _CurrentTilt * 100);
         }
         DrawPath();
+        targetDecal.SetVector3("WorldSpacePos", hitPosition);
     }
     void DrawPath()
     {
         if (_CurrentTilt == 0 || _exetingGround || !_Grounded)
         {
+            targetDecal.SetBool("Disabled", true);
             _LineRenderer.positionCount = 0;
             return;
         }
+            targetDecal.SetBool("Disabled", false);
+
         float camY = _camera.forward.y;
 
         float t = Mathf.InverseLerp(_inversLerpMin, _inversLerpMax, camY);
