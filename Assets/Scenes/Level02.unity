@@ -4065,6 +4065,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5052718111642043487, guid: 717c812502a0d19459b90118bd9ee598, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6836463560700711173, guid: 717c812502a0d19459b90118bd9ee598, type: 3}
       propertyPath: m_Name
       value: Lava
