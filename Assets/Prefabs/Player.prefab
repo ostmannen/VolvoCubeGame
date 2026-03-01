@@ -190,20 +190,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseJumpForce: 0
-  _JumpForce: 400
+  _JumpForce: 150
   _jumpDelay: 1
   _startJumpHeight: 7
   _minAngle: -70
-  _maxAngle: 0
-  _inversLerpMin: -1
-  _inversLerpMax: -0.2
+  _maxAngle: -20
+  _inversLerpMin: -0.5
+  _inversLerpMax: 0
   _blendShapeIndex: 1
   _maxJumps: 5
   _extraGravity: 0
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _sphereRadius: 0.3
+  _sphereRadius: 0.4
   _groundPosition: {fileID: 318727194006277214}
   _rotationSpeed: 100
   _rotateCameraSpeed: 50
@@ -211,10 +211,11 @@ MonoBehaviour:
   _camera: {fileID: 3407236072581954639}
   _skinnedMeshRenderer: {fileID: 8547638823653946728}
   _impact: {fileID: 3049525413455215924, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
+  _FovVelocityChangeBack: 10
   _lineCount: 300
   _lineRaymask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65
 --- !u!114 &8681043161909754780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,7 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9ce68cb46b0f34aac5d3463ef18d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: {fileID: 0}
+  volume: {fileID: 5793390844392366307}
 --- !u!1 &3994230211176173371
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +593,7 @@ Transform:
   m_GameObject: {fileID: 6733267398669334911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -611,7 +612,7 @@ GameObject:
   - component: {fileID: 5793390844392366307}
   - component: {fileID: 1788184826036504862}
   m_Layer: 0
-  m_Name: Player01Volume
+  m_Name: Player02Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
