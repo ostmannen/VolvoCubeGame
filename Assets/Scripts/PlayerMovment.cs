@@ -33,8 +33,10 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
     [Header("LineRenderer")]
     [SerializeField] private int _lineCount;
+    [SerializeField] private LayerMask _lineRaymask;
     private LineRenderer _LineRenderer;
     private Vector3 _PlayerRotation;
+    private float _XRotation = 0f;
     private Vector3 _cameraRotation;
     private Rigidbody rb;
     private float _CurrentTilt;
@@ -65,7 +67,12 @@ public class PlayerMovment : MonoBehaviour
         }
         transform.Rotate(_PlayerRotation * Time.deltaTime);
 
-        _cameraHolder.Rotate(_cameraRotation * Time.deltaTime);
+        _XRotation += _cameraRotation.x * Time.deltaTime;
+        _XRotation = Mathf.Clamp(_XRotation, 0, 90);
+        _cameraHolder.localRotation = Quaternion.Euler(_XRotation, 0, 0);
+
+        //_cameraHolder.Rotate(_cameraRotation * Time.deltaTime);
+
         if (_skinnedMeshRenderer != null && _Grounded)
         {
             _skinnedMeshRenderer.SetBlendShapeWeight(_blendShapeIndex, _CurrentTilt * 100);
@@ -87,16 +94,14 @@ public class PlayerMovment : MonoBehaviour
 
         float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
 
-        Debug.Log("jumpangle: " + jumpAngle);
-
         Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
 
         Vector3 currentPos = transform.position;
         Vector3 velocity = jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce) / rb.mass;
         Vector3 hitPosition = Vector3.zero;
+        Vector3 lastRayStart = currentPos;
         bool weHit = false;
-        _LineRenderer.positionCount = _lineCount;
-
+        _LineRenderer.positionCount = _lineCount / 4;
 
         for (int i = 0; i < _lineCount; i++)
         {
@@ -107,19 +112,28 @@ public class PlayerMovment : MonoBehaviour
             }
             Vector3 nextPos = currentPos + velocity * Time.fixedDeltaTime;
 
-            if (Physics.Linecast(currentPos, nextPos, out RaycastHit hit))
+            if (i % 4 == 0)
             {
-                hitPosition = nextPos;
-                weHit = true;
-                _LineRenderer.positionCount = i;
-                return;
+                if (Physics.Linecast(lastRayStart, nextPos, out RaycastHit hit, _lineRaymask, QueryTriggerInteraction.Ignore))
+                {
+                    hitPosition = nextPos;
+                    weHit = true;
+                    _LineRenderer.positionCount = i / 4 + 1;
+                    _LineRenderer.SetPosition(i / 4, nextPos);
+
+                    return;
+                }
+                lastRayStart = nextPos;
             }
 
             currentPos = nextPos;
             velocity.y += Physics.gravity.y * Time.fixedDeltaTime;
 
             velocity *= (1f - rb.linearDamping * Time.fixedDeltaTime);
-            _LineRenderer.SetPosition(i, currentPos);
+            if (i % 4 == 0)
+            {
+                _LineRenderer.SetPosition(i / 4, currentPos);
+            }
         }
     }
     public void ChargeJump(InputAction.CallbackContext ctx)
@@ -133,7 +147,7 @@ public class PlayerMovment : MonoBehaviour
         {
             Jump3();
             //weewoo
-            if(_CurrentTilt >= 0.7f)
+            if (_CurrentTilt >= 0.7f)
             {
                 GetComponent<PostProcessingBehaviour>().LensDistortionChanged(true);
             }
