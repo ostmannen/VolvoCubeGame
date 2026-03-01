@@ -671,6 +671,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManger
       objectReference: {fileID: 0}
+    - target: {fileID: 517684355979430963, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: m_Pitch
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 517684355979430963, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 517684355979430963, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663994152472015640, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663994152472015640, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: sounds.Array.data[1].pitch
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663994152472015640, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: sounds.Array.data[2].pitch
+      value: 0.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4663994152472015640, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.201
+      objectReference: {fileID: 0}
     - target: {fileID: 5818060768577055722, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
       propertyPath: player1
       value: 
@@ -722,13 +750,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8432534263443548, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 927618338}
-    - targetCorrespondingSourceObject: {fileID: 8432534263443548, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 927618339}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
 --- !u!1 &356495779
 GameObject:
@@ -1790,133 +1812,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2518106ac7a2be84fbd9f4b97606b6cb, type: 3}
---- !u!1 &927618335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8432534263443548, guid: c589ad93f3f6d244badef05bae6d48a0, type: 3}
-  m_PrefabInstance: {fileID: 282295464}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &927618338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927618335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c49041d50411ef47a5251d57d8b5452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - id: Impact
-    clip: {fileID: 8300000, guid: 126e072ff105fd84f9f599a82659b90c, type: 3}
-    volume: 1
-    pitch: 0
-  - id: Crusher
-    clip: {fileID: 8300000, guid: a06971f05539c664891f03523e3e0cb3, type: 3}
-    volume: 1
-    pitch: 0
-  - id: Lava
-    clip: {fileID: 8300000, guid: f5b2a8b639fd88c41af4ee457077628f, type: 3}
-    volume: 1
-    pitch: 0
---- !u!82 &927618339
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927618335}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 0564d34768b2b2f45945935ec657a702, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &929202954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4332,9 +4227,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2269928318691426861, guid: 717c812502a0d19459b90118bd9ee598, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6836463560700711173, guid: 717c812502a0d19459b90118bd9ee598, type: 3}
       propertyPath: m_Name
       value: Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 6946620030207650881, guid: 717c812502a0d19459b90118bd9ee598, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.132
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -31,6 +31,8 @@ public class Respawn : MonoBehaviour
             if (_lavaSplash != null)
             {
                 Instantiate(_lavaSplash, _player1.transform.position, Quaternion.identity);
+                        AudioManager.Instance.Play("Lava");
+
             }
             Invoke(nameof(RespawnPlayer1), _respawnDelay);
             _input1.enabled = false;
@@ -41,6 +43,7 @@ public class Respawn : MonoBehaviour
             if (_lavaSplash != null)
             {
                 Instantiate(_lavaSplash, _player2.transform.position, Quaternion.identity);
+                        AudioManager.Instance.Play("Lava");
             }
             Invoke(nameof(RespawnPlayer2), _respawnDelay);
             _input2.enabled = false;

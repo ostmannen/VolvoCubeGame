@@ -43,6 +43,7 @@ public class AudioManager : MonoBehaviour
     public void Play(string id)
     {
         Sound s = soundLookup[id];
+        Debug.Log(s);
         audioSource.pitch = s.pitch;
         audioSource.PlayOneShot(s.clip, s.volume);
     }

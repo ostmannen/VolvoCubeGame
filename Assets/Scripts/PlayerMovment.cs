@@ -104,6 +104,7 @@ public class PlayerMovment : MonoBehaviour
                     if (_Animator != null)
                     {
                         _Animator.SetTrigger("Land");
+                        AudioManager.Instance.Play("Impact");
                     }
                 }
                 _InAir = false;
@@ -266,7 +267,9 @@ public class PlayerMovment : MonoBehaviour
     {
         if (_ImpactReady)
         {
+
             if (Physics.CheckSphere(_groundPosition.position, _sphereRadius, _noImpactLayerMask, QueryTriggerInteraction.Ignore)) return;
+            AudioManager.Instance.Play("Impact");
 
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
 

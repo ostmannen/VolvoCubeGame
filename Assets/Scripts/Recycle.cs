@@ -19,6 +19,7 @@ public class Recycle : MonoBehaviour
             GameObject player = playerMovment.gameObject;
 
             _animator.SetBool("Crushing", true);
+            AudioManager.Instance.Play("Crusher");
             cam.parent = _cameraTransform;
             cam.transform.localPosition = Vector3.zero;
             cam.transform.localRotation = Quaternion.Euler(0, 0, 0);
