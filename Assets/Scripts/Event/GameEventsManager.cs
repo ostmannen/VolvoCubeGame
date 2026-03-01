@@ -32,4 +32,12 @@ public class GameEventsManager : MonoBehaviour
             OnRespawnPlayer(player);
         }
     }
+    public event Action<int, bool> OnButtonPress;
+    public void ButtonPress(int id, bool pressedDown)
+    {
+        if (OnButtonPress != null)
+        {
+            OnButtonPress(id, pressedDown);
+        }
+    }
 }
