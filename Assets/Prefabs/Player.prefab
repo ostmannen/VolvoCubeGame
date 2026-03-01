@@ -199,6 +199,7 @@ MonoBehaviour:
   _inversLerpMax: 0
   _blendShapeIndex: 1
   _maxJumps: 5
+  _chargeAmountForLanding: 0.5
   _extraGravity: 0
   _groundMask:
     serializedVersion: 2
@@ -212,6 +213,7 @@ MonoBehaviour:
   _skinnedMeshRenderer: {fileID: 8547638823653946728}
   _impact: {fileID: 3049525413455215924, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
   _FovVelocityChangeBack: 10
+  _impactEffect: {fileID: 68058318064452417, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
   _lineCount: 300
   _lineRaymask:
     serializedVersion: 2

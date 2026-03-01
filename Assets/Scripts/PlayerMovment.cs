@@ -17,8 +17,10 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private float _inversLerpMax = -0.2f;
     [SerializeField] private int _blendShapeIndex = 0;
     [SerializeField] private int _maxJumps = 5;
+    [SerializeField] private float _chargeAmountForLanding = 0.3f;
     private int _CurrentJumps;
     private bool _exetingGround = false;
+    private bool _InAir = false;
     [Header("Gravity")]
     [SerializeField] private float _extraGravity;
     [Header("Grounded")]
@@ -35,6 +37,8 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] private VisualEffect _impact;
     [SerializeField] private float _FovVelocityChangeBack = 10f;
+    [SerializeField] private GameObject _impactEffect;
+    private bool _ImpactReady = false;
     [Header("LineRenderer")]
     [SerializeField] private int _lineCount;
     [SerializeField] private LayerMask _lineRaymask;
@@ -43,6 +47,7 @@ public class PlayerMovment : MonoBehaviour
     private float _XRotation = 0f;
     private Vector3 _cameraRotation;
     private Rigidbody rb;
+    private Animator _Animator;
     private float _CurrentTilt;
     Vector3 hitPosition;
     bool _FovChanged = false;
@@ -52,6 +57,7 @@ public class PlayerMovment : MonoBehaviour
         GameEventsManager.instance.OnRespawnPlayer += OnRespawn;
 
         rb = GetComponent<Rigidbody>();
+        _Animator = GetComponentInChildren<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -89,6 +95,17 @@ public class PlayerMovment : MonoBehaviour
             {
                 ResetJumpCount();
                 GameEventsManager.instance.Death(this.gameObject);
+            }
+            if (_Grounded)
+            {
+                if (_InAir)
+                {
+                    if (_Animator != null)
+                    {
+                        _Animator.SetTrigger("Land");
+                    }
+                }
+                _InAir = false;
             }
         }
         if (!_Grounded)
@@ -181,6 +198,11 @@ public class PlayerMovment : MonoBehaviour
             {
                 _FovChanged = true;
                 GetComponent<PostProcessingBehaviour>().LensDistortionChanged(true);
+
+                if (_Animator != null)
+                {
+                    _Animator.SetTrigger("LaunchHard");
+                }
             }
         }
     }
@@ -189,6 +211,11 @@ public class PlayerMovment : MonoBehaviour
         _skinnedMeshRenderer.SetBlendShapeWeight(_blendShapeIndex, 0);
         _exetingGround = true;
         _Grounded = false;
+        if (_CurrentTilt >= _chargeAmountForLanding)
+        {
+            _InAir = true;
+            _ImpactReady = true;
+        }
         Invoke(nameof(ResetJump), _jumpDelay);
 
         float camY = _camera.forward.y;
@@ -222,6 +249,7 @@ public class PlayerMovment : MonoBehaviour
     }
     public void ResetJumpCount()
     {
+        _ImpactReady = false;
         _CurrentJumps = _maxJumps;
     }
     public void OnRespawn(GameObject player)
@@ -231,6 +259,19 @@ public class PlayerMovment : MonoBehaviour
         {
             ResetJumpCount();
             Debug.Log("fenjfael");
+        }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (_ImpactReady)
+        {
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
+
+            Instantiate(_impactEffect, collision.contacts[0].point, rot);
+            if (Physics.CheckSphere(_groundPosition.position, _sphereRadius, _groundMask, QueryTriggerInteraction.Ignore))
+            {
+                _ImpactReady = false;
+            }
         }
     }
 }
