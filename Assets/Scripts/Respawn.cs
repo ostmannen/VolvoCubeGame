@@ -13,6 +13,7 @@ public class Respawn : MonoBehaviour
     private bool _Respawning2 = false;
     [SerializeField] private float _deathHeight = -10;
     [SerializeField] private float _respawnDelay = 1f;
+    [SerializeField] private GameObject _lavaSplash;
     void Start()
     {
         _player1.position = _spawnPosition1.position;
@@ -27,12 +28,20 @@ public class Respawn : MonoBehaviour
     {
         if (_player1.position.y < _deathHeight && !_Respawning1)
         {
+            if (_lavaSplash != null)
+            {
+                Instantiate(_lavaSplash, _player1.transform.position, Quaternion.identity);
+            }
             Invoke(nameof(RespawnPlayer1), _respawnDelay);
             _input1.enabled = false;
             _Respawning1 = true;
         }
         if (_player2.position.y < _deathHeight && !_Respawning2)
         {
+            if (_lavaSplash != null)
+            {
+                Instantiate(_lavaSplash, _player2.transform.position, Quaternion.identity);
+            }
             Invoke(nameof(RespawnPlayer2), _respawnDelay);
             _input2.enabled = false;
             _Respawning2 = true;

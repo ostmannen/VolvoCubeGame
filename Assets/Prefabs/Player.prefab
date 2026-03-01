@@ -214,6 +214,9 @@ MonoBehaviour:
   _impact: {fileID: 3049525413455215924, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
   _FovVelocityChangeBack: 10
   _impactEffect: {fileID: 68058318064452417, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
+  _noImpactLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _lineCount: 300
   _lineRaymask:
     serializedVersion: 2

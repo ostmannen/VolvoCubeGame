@@ -38,6 +38,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private VisualEffect _impact;
     [SerializeField] private float _FovVelocityChangeBack = 10f;
     [SerializeField] private GameObject _impactEffect;
+    [SerializeField] private LayerMask _noImpactLayerMask;
     private bool _ImpactReady = false;
     [Header("LineRenderer")]
     [SerializeField] private int _lineCount;
@@ -265,6 +266,8 @@ public class PlayerMovment : MonoBehaviour
     {
         if (_ImpactReady)
         {
+            if (Physics.CheckSphere(_groundPosition.position, _sphereRadius, _noImpactLayerMask, QueryTriggerInteraction.Ignore)) return;
+
             Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
 
             Instantiate(_impactEffect, collision.contacts[0].point, rot);

@@ -50,7 +50,11 @@ MonoBehaviour:
   _spawnPosition2: {fileID: 5691008122057785062}
   _player1: {fileID: 0}
   _player2: {fileID: 0}
+  _input1: {fileID: 0}
+  _input2: {fileID: 0}
   _deathHeight: -10
+  _respawnDelay: 1
+  _lavaSplash: {fileID: 6975345704722631470, guid: b86b38679ca9a794f9dc5dcf691021a5, type: 3}
 --- !u!1 &4528699071157942262
 GameObject:
   m_ObjectHideFlags: 0
