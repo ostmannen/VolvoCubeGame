@@ -2,6 +2,7 @@ using Unity.Mathematics;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private float _inversLerpMin = -1;
     [SerializeField] private float _inversLerpMax = -0.2f;
     [SerializeField] private int _blendShapeIndex = 0;
-    [SerializeField] private int _jumps = 5;
+    [SerializeField] private int _maxJumps = 5;
+    private int _CurrentJumps;
     private bool _exetingGround = false;
     [Header("Gravity")]
     [SerializeField] private float _extraGravity;
@@ -27,10 +29,12 @@ public class PlayerMovment : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private float _rotationSpeed = 1f;
     [SerializeField] private float _rotateCameraSpeed = 1;
-    [SerializeField] private Transform _cameraHolder;
+    [SerializeField] public Transform _cameraHolder;
     [SerializeField] private Transform _camera;
     [Header("Visual")]
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
+    [SerializeField] private VisualEffect _impact;
+    [SerializeField] private float _FovVelocityChangeBack = 10f;
     [Header("LineRenderer")]
     [SerializeField] private int _lineCount;
     [SerializeField] private LayerMask _lineRaymask;
@@ -40,8 +44,13 @@ public class PlayerMovment : MonoBehaviour
     private Vector3 _cameraRotation;
     private Rigidbody rb;
     private float _CurrentTilt;
+    Vector3 hitPosition;
+    bool _FovChanged = false;
+    //awawafw
     void Start()
     {
+        GameEventsManager.instance.OnRespawnPlayer += OnRespawn;
+
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -53,13 +62,34 @@ public class PlayerMovment : MonoBehaviour
         _LineRenderer.startWidth = 0.2f;
         _LineRenderer.endWidth = 0.2f;
 
-
+        ResetJumpCount();
+    }
+    void OnDisable()
+    {
+        GameEventsManager.instance.OnRespawnPlayer -= OnRespawn;
     }
     void Update()
     {
         if (!_exetingGround)
         {
             _Grounded = Physics.CheckSphere(_groundPosition.position, _sphereRadius, _groundMask, QueryTriggerInteraction.Ignore);
+
+            if (_Grounded && _FovChanged == true)
+            {
+                GetComponent<PostProcessingBehaviour>().LensDistortionChanged(false);
+                _FovChanged = false;
+            }
+            else if (_FovChanged == true && rb.linearVelocity.magnitude < _FovVelocityChangeBack)
+            {
+                GetComponent<PostProcessingBehaviour>().LensDistortionChanged(false);
+                _FovChanged = false;
+            }
+
+            if (_Grounded && _CurrentJumps == 0)
+            {
+                ResetJumpCount();
+                GameEventsManager.instance.Death(this.gameObject);
+            }
         }
         if (!_Grounded)
         {
@@ -98,7 +128,7 @@ public class PlayerMovment : MonoBehaviour
 
         Vector3 currentPos = transform.position;
         Vector3 velocity = jumpDir * (_JumpForce * _CurrentTilt + _baseJumpForce) / rb.mass;
-        Vector3 hitPosition = Vector3.zero;
+        hitPosition = Vector3.zero;
         Vector3 lastRayStart = currentPos;
         bool weHit = false;
         _LineRenderer.positionCount = _lineCount / 4;
@@ -149,6 +179,7 @@ public class PlayerMovment : MonoBehaviour
             //weewoo
             if (_CurrentTilt >= 0.7f)
             {
+                _FovChanged = true;
                 GetComponent<PostProcessingBehaviour>().LensDistortionChanged(true);
             }
         }
@@ -166,11 +197,13 @@ public class PlayerMovment : MonoBehaviour
 
         t = 1f - t;
 
+        _CurrentJumps--;
+
         //t = Mathf.Clamp01(t);
 
         float jumpAngle = Mathf.Lerp(_minAngle, _maxAngle, t);
 
-        Debug.Log("jumpangle: " + jumpAngle);
+        //Debug.Log("jumpangle: " + jumpAngle);
 
         Vector3 jumpDir = Quaternion.AngleAxis(jumpAngle, transform.right) * transform.forward;
 
@@ -186,5 +219,18 @@ public class PlayerMovment : MonoBehaviour
     private void ResetJump()
     {
         _exetingGround = false;
+    }
+    public void ResetJumpCount()
+    {
+        _CurrentJumps = _maxJumps;
+    }
+    public void OnRespawn(GameObject player)
+    {
+        Debug.Log(player.name + " / " + this.gameObject);
+        if (player == this.gameObject)
+        {
+            ResetJumpCount();
+            Debug.Log("fenjfael");
+        }
     }
 }

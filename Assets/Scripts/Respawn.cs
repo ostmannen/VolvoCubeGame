@@ -17,6 +17,11 @@ public class Respawn : MonoBehaviour
     {
         _player1.position = _spawnPosition1.position;
         _player2.position = _spawnPosition2.position;
+        GameEventsManager.instance.OnDeath += OnPayerDeath;
+    }
+    void OnDisable()
+    {
+        GameEventsManager.instance.OnDeath -= OnPayerDeath;
     }
     void Update()
     {
@@ -36,17 +41,29 @@ public class Respawn : MonoBehaviour
 
     void RespawnPlayer1()
     {
+        _player1.GetComponent<PlayerMovment>().ResetJumpCount();
         _player1.position = _spawnPosition1.position;
         _input1.enabled = true;
         _Respawning1 = false;
     }
     void RespawnPlayer2()
     {
+        _player2.GetComponent<PlayerMovment>().ResetJumpCount();
         _player2.position = _spawnPosition2.position;
         _input2.enabled = true;
         _Respawning2 = false;
     }
-
+    private void OnPayerDeath(GameObject player)
+    {
+        if (player == _player1.gameObject)
+        {
+            RespawnPlayer1();
+        }
+        if (player == _player2.gameObject)
+        {
+            RespawnPlayer2();
+        }
+    }
 
     //this is so dumb, but like brrrrrrrr... wrooomm
 }

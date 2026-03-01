@@ -6,7 +6,7 @@ public class PlayerSetup : MonoBehaviour
     public PlayerInput player1;
     public PlayerInput player2;
 
-    void Start()
+    void Awake()
     {
         var gamepads = Gamepad.all;
         if (gamepads.Count >= 2)

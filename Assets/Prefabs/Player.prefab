@@ -198,7 +198,7 @@ MonoBehaviour:
   _inversLerpMin: -1
   _inversLerpMax: -0.2
   _blendShapeIndex: 1
-  _jumps: 5
+  _maxJumps: 5
   _extraGravity: 0
   _groundMask:
     serializedVersion: 2
@@ -210,7 +210,11 @@ MonoBehaviour:
   _cameraHolder: {fileID: 5202306887813335397}
   _camera: {fileID: 3407236072581954639}
   _skinnedMeshRenderer: {fileID: 8547638823653946728}
+  _impact: {fileID: 3049525413455215924, guid: 1e8a9de578d78de408abcca33ec790b9, type: 3}
   _lineCount: 300
+  _lineRaymask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8681043161909754780
 MonoBehaviour:
   m_ObjectHideFlags: 0
