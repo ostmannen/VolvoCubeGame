@@ -20,7 +20,8 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private float _chargeAmountForLanding = 0.3f;
     private int _CurrentJumps;
     private bool _exetingGround = false;
-    private bool _InAir = false;
+    private bool _InAirBig = false;
+    private bool _InAirSmall = false;
     [Header("Gravity")]
     [SerializeField] private float _extraGravity;
     [Header("Grounded")]
@@ -39,6 +40,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private float _FovVelocityChangeBack = 10f;
     [SerializeField] private GameObject _impactEffect;
     [SerializeField] private LayerMask _noImpactLayerMask;
+    [SerializeField] private Renderer _renderer;
     private bool _ImpactReady = false;
     [Header("LineRenderer")]
     [SerializeField] private int _lineCount;
@@ -101,7 +103,7 @@ public class PlayerMovment : MonoBehaviour
             }
             if (_Grounded)
             {
-                if (_InAir)
+                if (_InAirBig)
                 {
                     if (_Animator != null)
                     {
@@ -109,12 +111,18 @@ public class PlayerMovment : MonoBehaviour
                         AudioManager.Instance.Play("Impact");
                     }
                 }
-                _InAir = false;
+                _InAirBig = false;
             }
         }
         if (!_Grounded)
         {
             rb.AddForce(Vector3.down * _extraGravity, ForceMode.Acceleration);
+        }
+        if (_InAirSmall && _Grounded)
+        {
+            _InAirSmall = false;
+            float _crackAmount = 0.2f * (_maxJumps - (_CurrentJumps - 1));
+            _renderer.material.SetFloat("_Damage", _crackAmount);
         }
         transform.Rotate(_PlayerRotation * Time.deltaTime);
 
@@ -139,7 +147,7 @@ public class PlayerMovment : MonoBehaviour
             _LineRenderer.positionCount = 0;
             return;
         }
-            targetDecal.SetBool("Disabled", false);
+        targetDecal.SetBool("Disabled", false);
 
         float camY = _camera.forward.y;
 
@@ -221,9 +229,10 @@ public class PlayerMovment : MonoBehaviour
         _Grounded = false;
         if (_CurrentTilt >= _chargeAmountForLanding)
         {
-            _InAir = true;
+            _InAirBig = true;
             _ImpactReady = true;
         }
+        _InAirSmall = true;
         Invoke(nameof(ResetJump), _jumpDelay);
 
         float camY = _camera.forward.y;

@@ -927,9 +927,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 47f542760e077724ab694e3936f4343a, type: 2}
     - target: {fileID: 5913318852984816470, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
+      propertyPath: _material
+      value: 
+      objectReference: {fileID: 2100000, guid: b43659b28c9605848adc53c759e8e137, type: 2}
+    - target: {fileID: 5913318852984816470, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
       propertyPath: _JumpForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8547638823653946728, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b43659b28c9605848adc53c759e8e137, type: 2}
     - target: {fileID: 8783515802818932841, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.93
@@ -2022,6 +2030,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 935283077511766671, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3729381394178300813, guid: 548b9eb8c4e15c64796a81ea3e3c0b91, type: 3}
       propertyPath: m_Name
       value: Player
