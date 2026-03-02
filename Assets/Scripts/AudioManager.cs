@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     private Dictionary<string, Sound> soundLookup;
     private AudioSource audioSource;
 
-    void Awake()
+    void Start()
     {
         if (Instance != null && Instance != this)
         {
@@ -28,7 +28,6 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         audioSource = gameObject.AddComponent<AudioSource>();
         soundLookup = new Dictionary<string, Sound>();
@@ -43,6 +42,7 @@ public class AudioManager : MonoBehaviour
     public void Play(string id)
     {
         Sound s = soundLookup[id];
+        if (s == null) return;
         Debug.Log(s);
         audioSource.pitch = s.pitch;
         audioSource.PlayOneShot(s.clip, s.volume);
