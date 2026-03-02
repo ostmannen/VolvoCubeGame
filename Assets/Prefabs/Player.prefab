@@ -475,6 +475,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5913318852984816470}
+        m_TargetAssemblyTypeName: PlayerMovment, Assembly-CSharp
+        m_MethodName: ReloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5f7f1e5-8c79-4a47-8b53-2bcdc364c593
+    m_ActionName: 'Player/reloadScene[/Keyboard/p,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5913318852984816470}
+        m_TargetAssemblyTypeName: PlayerMovment, Assembly-CSharp
+        m_MethodName: LoadMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 56f32b75-f838-427c-80a8-56cf85940de0
+    m_ActionName: 'Player/MainMenu[/Keyboard/o,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

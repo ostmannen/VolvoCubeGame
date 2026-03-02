@@ -2,6 +2,7 @@ using Unity.Mathematics;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 
 public class PlayerMovment : MonoBehaviour
@@ -296,5 +297,13 @@ public class PlayerMovment : MonoBehaviour
                 _ImpactReady = false;
             }
         }
+    }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMeny");
     }
 }
