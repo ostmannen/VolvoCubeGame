@@ -33,7 +33,7 @@ public class Recycle : MonoBehaviour
     IEnumerator ResetPlayerStuff(PlayerMovment playerMovment)
     {
         yield return new WaitForSeconds(_recyleDuration);
-
+        playerMovment.ResetJumpCount();
         playerMovment.gameObject.transform.position = _spitOutPlayerPosition.position;
         playerMovment.enabled = true;
         Transform cam = playerMovment._cameraHolder;
