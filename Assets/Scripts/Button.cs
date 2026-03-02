@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+    public Animator animator;
     [SerializeField] private int id = 0;
     private int _PlayersOnButton = 0;
     void OnTriggerEnter(Collider other)
@@ -10,6 +11,7 @@ public class Button : MonoBehaviour
         {
             if (_PlayersOnButton == 0)
             {
+                animator.SetBool("Pressed", true);
                 GameEventsManager.instance.ButtonPress(id, true);
             }
             _PlayersOnButton++;
@@ -22,6 +24,7 @@ public class Button : MonoBehaviour
             _PlayersOnButton--;
             if (_PlayersOnButton == 0)
             {
+                animator.SetBool("Pressed", false);
                 GameEventsManager.instance.ButtonPress(id, false);
             }
         }
