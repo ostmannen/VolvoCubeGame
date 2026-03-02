@@ -318,7 +318,7 @@ MonoBehaviour:
   _extraGravity: 0
   _groundMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 64
   _sphereRadius: 0.4
   _groundPosition: {fileID: 318727194006277214}
   _rotationSpeed: 100

@@ -9,6 +9,11 @@ public class PlayerSetup : MonoBehaviour
     void Awake()
     {
         var gamepads = Gamepad.all;
+
+        foreach (var device in InputSystem.devices)
+        {
+            Debug.Log(device.displayName);
+        }
         if (gamepads.Count >= 2)
         {
             // Tilldela första gamepaden till player1
