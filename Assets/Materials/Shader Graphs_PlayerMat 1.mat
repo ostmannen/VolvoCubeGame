@@ -46,7 +46,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Damage: 0
+    - _Damage: 0.818
     - _Metallic: 0
     - _NormalStrength: 10
     - _QueueControl: 0

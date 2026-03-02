@@ -14,6 +14,15 @@
         },
         {
             "m_Id": "f03e633d20a846f9bb8eacd449577bbf"
+        },
+        {
+            "m_Id": "b66a2bfaffcf488f8ececc918a52fc1b"
+        },
+        {
+            "m_Id": "4f2e02515cbc44778f9935dc5004780c"
+        },
+        {
+            "m_Id": "44cefc0adf984eb0bc84eb1f03445070"
         }
     ],
     "m_Keywords": [],
@@ -637,8 +646,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 1352.0,
-            "y": 553.3333740234375
+            "x": 1702.66650390625,
+            "y": 509.99993896484377
         },
         "m_Blocks": [
             {
@@ -654,8 +663,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 1352.0,
-            "y": 753.3333740234375
+            "x": 1702.66650390625,
+            "y": 709.9999389648438
         },
         "m_Blocks": [
             {
@@ -1155,10 +1164,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -862.666748046875,
-            "y": 1005.3333740234375,
-            "width": 127.3333740234375,
-            "height": 119.9998779296875
+            "x": -966.6665649414063,
+            "y": 885.3333129882813,
+            "width": 127.33331298828125,
+            "height": 119.99993896484375
         }
     },
     "m_Slots": [
@@ -1833,6 +1842,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "44cefc0adf984eb0bc84eb1f03445070",
+    "m_Guid": {
+        "m_GuidSerialized": "d06b2b91-29f0-4815-965d-896c171b31bc"
+    },
+    "m_Name": "IntersectionFade",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "IntersectionFade",
+    "m_DefaultReferenceName": "_IntersectionFade",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "472b72fb7d374468a9fdc07eca116aa5",
@@ -1988,6 +2025,34 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "4f2e02515cbc44778f9935dc5004780c",
+    "m_Guid": {
+        "m_GuidSerialized": "4c4bf9e3-a5ad-4061-8d19-cab1f358bfbf"
+    },
+    "m_Name": "intersectionCutoff",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "intersectionCutoff",
+    "m_DefaultReferenceName": "_intersectionCutoff",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.8999999761581421,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
     }
 }
 
@@ -3871,6 +3936,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "b66a2bfaffcf488f8ececc918a52fc1b",
+    "m_Guid": {
+        "m_GuidSerialized": "6f4d4dab-d4e2-449f-aad1-a491bd0741b9"
+    },
+    "m_Name": "depthfadeDist",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "depthfadeDist",
+    "m_DefaultReferenceName": "_depthfadeDist",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 2.450000047683716,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "b76d3bfe639a4fe1aa3b2ae76f796928",
@@ -4505,6 +4598,15 @@
         },
         {
             "m_Id": "ec1f5e21ba71410b8b83a4c282b82f54"
+        },
+        {
+            "m_Id": "b66a2bfaffcf488f8ececc918a52fc1b"
+        },
+        {
+            "m_Id": "4f2e02515cbc44778f9935dc5004780c"
+        },
+        {
+            "m_Id": "44cefc0adf984eb0bc84eb1f03445070"
         }
     ]
 }

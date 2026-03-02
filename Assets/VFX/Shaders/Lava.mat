@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _SampleTexture2D_c3ecd9389e7e402c9e48565545bd0b4e_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: cbe2081754e03a64291308910d4f738c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -38,8 +42,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _IntersectionFade: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _depthfadeDist: 0
+    - _intersectionCutoff: 0.9
     m_Colors:
     - _BaseColor: {r: 0.0295, g: 0.003617877, b: 0, a: 0}
     - _Color01: {r: 0.059, g: 0.007235755, b: 0, a: 0}

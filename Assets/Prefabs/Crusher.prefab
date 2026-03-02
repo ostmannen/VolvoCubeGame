@@ -344,15 +344,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.7731223
+      value: -0.33792114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.38322353
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.9146876
+      value: 47.551582
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
       propertyPath: m_LocalRotation.w
@@ -382,10 +382,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6551110343683089511, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bddfc01b13ce6c4db68c535932f037f, type: 2}
+    - target: {fileID: -1349468753416028883, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 987ce5d435968444f8db2ad038361483, type: 2}
     - target: {fileID: 919132149155446097, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
       propertyPath: m_Name
       value: Crusher
       objectReference: {fileID: 0}
+    - target: {fileID: 8000472256966920974, guid: 81f84efa83e0cfd4b9b2720281a32cab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bddfc01b13ce6c4db68c535932f037f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
