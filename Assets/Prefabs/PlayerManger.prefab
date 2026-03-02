@@ -63,16 +63,20 @@ MonoBehaviour:
   sounds:
   - id: Impact
     clip: {fileID: 8300000, guid: 126e072ff105fd84f9f599a82659b90c, type: 3}
-    volume: 1
-    pitch: 0
+    volume: 0.201
+    pitch: 0.93
   - id: Crusher
     clip: {fileID: 8300000, guid: a06971f05539c664891f03523e3e0cb3, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 0.92
   - id: Lava
     clip: {fileID: 8300000, guid: f5b2a8b639fd88c41af4ee457077628f, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 0.79
+  - id: Swoosh
+    clip: {fileID: 8300000, guid: 9e5703643f2ae514c9c8b26121dd64de, type: 3}
+    volume: 1
+    pitch: 0.79
 --- !u!82 &517684355979430963
 AudioSource:
   m_ObjectHideFlags: 0

@@ -218,6 +218,7 @@ public class PlayerMovment : MonoBehaviour
                 if (_Animator != null)
                 {
                     _Animator.SetTrigger("LaunchHard");
+                    AudioManager.Instance.Play("Swoosh");
                 }
             }
         }
