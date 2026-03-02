@@ -268,6 +268,7 @@ public class PlayerMovment : MonoBehaviour
     {
         _ImpactReady = false;
         _CurrentJumps = _maxJumps;
+        _renderer.material.SetFloat("_Damage", 0);
     }
     public void OnRespawn(GameObject player)
     {

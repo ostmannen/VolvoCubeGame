@@ -15,11 +15,11 @@ public class MovePlatform : MonoBehaviour
     {
         if (_IsMoving > 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _endTransform.position, 3f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _endTransform.position, _speed * Time.deltaTime);
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, _startTransform.position, 3f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _startTransform.position, _speed * Time.deltaTime);
         }
     }
     private void ButtonPressed(int id, bool pressedDown)
