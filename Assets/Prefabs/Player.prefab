@@ -318,7 +318,7 @@ MonoBehaviour:
   _extraGravity: 0
   _groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   _sphereRadius: 0.4
   _groundPosition: {fileID: 318727194006277214}
   _rotationSpeed: 100
@@ -336,7 +336,7 @@ MonoBehaviour:
   _lineCount: 300
   _lineRaymask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 321
   targetDecal: {fileID: 2438287364508227046}
 --- !u!114 &8681043161909754780
 MonoBehaviour:
@@ -912,6 +912,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 82f7ae07b53e0784dbdd836013d2cb99, type: 3}
       propertyPath: m_Name
       value: PlayerCubeVisuals
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 82f7ae07b53e0784dbdd836013d2cb99, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 82f7ae07b53e0784dbdd836013d2cb99, type: 3}
       propertyPath: m_TagString
