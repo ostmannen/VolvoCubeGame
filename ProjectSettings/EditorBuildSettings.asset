@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level02.unity
     guid: e7241439a3e35f145b555eefe16c602b
+  - enabled: 1
+    path: Assets/Scenes/Level03.unity
+    guid: c801a2682acfeb048b12fe88a26d3933
+  - enabled: 1
+    path: Assets/Scenes/WinnyWinny.unity
+    guid: babf73db4859cdc46902585ea3632c04
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
